@@ -1,18 +1,23 @@
-// AdminDashboard styles
+// AdminDashboard Modernized Styles
+$primary-color: #2c6bed;
+$accent-color: #03A9F4;
+$success-color: #4caf50;
+$danger-color: #f44336;
+$background-color: #f8fafc;
+$box-shadow: 0 8px 32px 0 rgba(44,107,237,0.08);
+$radius: 14px;
+
 // Media query mixins
 @mixin for-tablet {
   @media (max-width: 1024px) { @content; }
 }
-
 @mixin for-mobile {
   @media (max-width: 768px) { @content; }
 }
-
 @mixin for-small-mobile {
   @media (max-width: 480px) { @content; }
 }
 
-// Global styles to ensure no overflow issues
 * {
   box-sizing: border-box;
   word-wrap: break-word;
@@ -21,15 +26,21 @@
 
 .admin-dashboard {
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background: linear-gradient(135deg, $primary-color 60%, $accent-color 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0;
   
   .admin-container {
     max-width: 1600px;
     width: 100%;
     margin: 0 auto;
-    padding: 30px 40px;
+    padding: 38px 40px 28px 40px;
     box-sizing: border-box;
+    background: #fff;
+    border-radius: $radius;
+    box-shadow: $box-shadow;
+    margin-top: 36px;
+    margin-bottom: 36px;
   }
   
   .admin-header {
@@ -41,24 +52,28 @@
     border-bottom: 1px solid #e0e0e0;
     
     h1 {
-      color: #2c3e50;
+      color: $primary-color;
       margin: 0;
-      font-size: 28px;
-      font-weight: 600;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
     
     .logout-btn {
-      background-color: #f44336;
+      background: linear-gradient(90deg, $danger-color 80%, #ff7961 100%);
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
+      padding: 12px 26px;
+      border-radius: 6px;
       cursor: pointer;
-      font-weight: 500;
-      transition: background-color 0.3s;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(244,67,54,0.07);
+      transition: background 0.3s, transform 0.15s;
       
       &:hover {
-        background-color: #d32f2f;
+        background: linear-gradient(90deg, darken($danger-color, 10%) 80%, #ff7961 100%);
+        transform: scale(1.03);
       }
     }
   }

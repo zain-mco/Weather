@@ -86,8 +86,7 @@ const Login = () => {
         <div className="login-page">
             <div className="login-container">
                 <h1>Admin Login</h1>
-
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} autoComplete="off">
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input
@@ -95,10 +94,12 @@ const Login = () => {
                             id="username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Enter username"
                             required
+                            autoFocus
+                            className="form-control"
                         />
                     </div>
-
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input
@@ -106,15 +107,14 @@ const Login = () => {
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Enter password"
                             required
+                            className="form-control"
                         />
                     </div>
-
                     <button type="submit" className="login-btn">Login</button>
-
                     {error && <div className="error-message">{error}</div>}
                 </form>
-
                 <a href="/" className="back-link">Back to Weather Dashboard</a>
             </div>
         </div>

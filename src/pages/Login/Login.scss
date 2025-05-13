@@ -1,47 +1,139 @@
-// Login styles
-.login-container {
+// Login Page Modern Styles
+$primary-color: #2c6bed;
+$accent-color: #03A9F4;
+$danger-color: #f44336;
+$background-color: #f8fafc;
+$input-bg: #f9f9f9;
+$input-border: #d0d7de;
+$shadow: 0 8px 32px 0 rgba(44,107,237,0.10);
+$radius: 12px;
+
+.login-page {
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f5f5f5;
-  
-  .login-form {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #333;
-    }
-    
+  justify-content: center;
+  background: linear-gradient(135deg, $primary-color 60%, $accent-color 100%);
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+}
+
+.login-container {
+  background: #fff;
+  padding: 42px 36px 32px 36px;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  width: 100%;
+  max-width: 370px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.8s cubic-bezier(.39,.575,.56,1.000);
+
+  h1 {
+    color: $primary-color;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 22px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  form {
+    width: 100%;
+    margin-bottom: 18px;
+
     .form-group {
-      margin-bottom: 15px;
-    }
-    
-    input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-    
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #4285f4;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      
-      &:hover {
-        background-color: #3367d6;
+      margin-bottom: 16px;
+      label {
+        font-size: 1rem;
+        color: #334e68;
+        margin-bottom: 7px;
+        font-weight: 500;
+        display: block;
+      }
+      input {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 6px;
+        border: 1.5px solid $input-border;
+        background: $input-bg;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 0 2px rgba(44,107,237,0.10);
+        }
       }
     }
+    .login-btn {
+      width: 100%;
+      padding: 12px 0;
+      background: linear-gradient(90deg, $primary-color 70%, $accent-color 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(44,107,237,0.08);
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 8px;
+      &:hover {
+        background: linear-gradient(90deg, darken($primary-color, 8%) 60%, $accent-color 100%);
+        transform: translateY(-2px) scale(1.02);
+      }
+    }
+    .error-message {
+      color: $danger-color;
+      background: #fff0f0;
+      border: 1px solid #ffd6d6;
+      padding: 10px 12px;
+      border-radius: 6px;
+      margin-top: 12px;
+      font-size: 0.98rem;
+      text-align: center;
+      font-weight: 500;
+      animation: shake 0.2s;
+    }
   }
+  .back-link {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 12px;
+    padding: 8px 0;
+    border-radius: 5px;
+    transition: background 0.2s, color 0.2s;
+    display: inline-block;
+    &:hover {
+      background: rgba(44,107,237,0.08);
+      color: $accent-color;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 22px 10px 20px 10px;
+    max-width: 98vw;
+    h1 {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(-4px); }
+  25% { transform: translateX(4px); }
+  50% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
 }
