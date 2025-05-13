@@ -1,0 +1,363 @@
+@import '../../styles/variables';
+@import '../../styles/animations';
+
+// Modern Color Palette - matching Dashboard colors
+$primary: #2c6bed;
+$secondary: #64B5F6;
+$accent: #03A9F4;
+$dark: #102a43;
+$light: #ffffff;
+$background: #f8fafc;
+$gray-light: #f0f4f8;
+$gray-mid: #829ab1;
+$gray-dark: #486581;
+$text: #334e68;
+$danger: #e63757;
+$gradient-primary: linear-gradient(87deg, $primary 0, $secondary 100%);
+$box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+$transition: all 0.2s ease;
+
+// Animations
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+$primary-color: #2196F3;
+$secondary-color: #00BCD4;
+$text-dark: #263238;
+$text-light: #FFFFFF;
+$button-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+$error-color: #FF5252;
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.weather-container {
+    text-align: center;
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px auto 60px; /* إضافة هامش علوي */
+    animation: fadeUp 0.8s ease-out;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 80px; /* مسافة كبيرة بين قسم البحث وقسم النتائج */
+}
+
+/* قسم البحث */
+.search-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    background-color: rgba($light, 0.03);
+    border-radius: 20px;
+    position: relative;
+    
+    .search-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: $light;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 4px rgba($dark, 0.2);
+    }
+    
+    .search-subtitle {
+        font-size: 16px;
+        color: rgba($light, 0.85);
+        margin-bottom: 30px;
+        max-width: 500px;
+    }
+}
+
+/* قسم النتائج */
+.results-section {
+    width: 100%;
+    padding: 30px 0 20px;
+    position: relative;
+    margin-top: 150px; /* زيادة الهامش العلوي بشكل مضاعف */
+
+    .top-spacer {
+        height: 250px; /* زيادة كبيرة جداً للمسافة الفارغة */
+        width: 100%;
+        margin-bottom: 50px;
+    }
+}
+
+.search-container {
+    display: flex;
+    margin-bottom: 20px;
+    position: relative;
+    background-color: $light;
+    border-radius: 12px;
+    box-shadow: $box-shadow;
+    overflow: hidden;
+    max-width: 580px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeUp 0.6s ease-out;
+    transition: $transition;
+    border: 1px solid rgba($primary, 0.05);
+
+    .city-input {
+        flex: 1;
+        padding: 20px 25px;
+        border: none;
+        font-size: 16px;
+        font-weight: 500;
+        outline: none;
+        background-color: $light;
+        color: $dark;
+        transition: $transition;
+
+        &:focus {
+            background-color: $gray-light;
+        }
+
+        &::placeholder {
+            color: $gray-mid;
+            font-weight: 400;
+        }
+    }
+
+    .search-btn {
+        background: $gradient-primary;
+        color: $light;
+        border: none;
+        padding: 0 30px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        transition: $transition;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba($primary, 0.2);
+
+        svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        &:hover {
+            background: linear-gradient(87deg, darken($primary, 5%) 0, darken($secondary, 5%) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba($primary, 0.3);
+        }
+        
+        &:active {
+            transform: translateY(1px);
+        }
+    }
+}
+
+.loading, .error {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px auto;
+    max-width: 580px;
+    font-size: 16px;
+    font-weight: 500;
+    animation: fadeUp 0.4s ease;
+    box-shadow: $box-shadow;
+}
+
+.loading {
+    background-color: $light;
+    color: $text;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    &:before {
+        content: '';
+        width: 22px;
+        height: 22px;
+        border: 2px solid $gray-light;
+        border-top: 2px solid $primary;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+}
+
+.error {
+    background-color: $light;
+    color: $danger;
+    border-left: 4px solid $danger;
+    display: flex;
+    align-items: center;
+    
+    &:before {
+        content: '⚠️';
+        margin-right: 10px;
+        font-size: 20px;
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.weather-info {
+    background-color: $light;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba($dark, 0.1);
+    animation: fadeUp 0.8s ease-out;
+    transition: $transition;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 auto; /* إزالة الهوامش العلوية لأنها موجودة في القسم الأم */
+    border: 1px solid rgba($primary, 0.05);
+    z-index: 15;
+    
+    .weather-card-header {
+        background: $gradient-primary;
+        color: $light;
+        padding: 50px 30px;
+        text-align: center;
+        position: relative;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+            z-index: 1;
+        }
+    }
+
+    .city-name {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-shadow: 0 2px 4px rgba($dark, 0.2);
+        letter-spacing: 0.5px;
+    }
+
+    .weather-card-body {
+        padding: 40px;
+        background-color: rgba($light, 0.99);
+    }
+
+    .weather-param {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 25px 20px;
+        background-color: $gray-light;
+        border-radius: 12px;
+        transition: $transition;
+        animation: slideRight 0.6s ease-out;
+        box-shadow: 0 4px 12px rgba($dark, 0.03);
+        border: 1px solid rgba($primary, 0.03);
+        
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba($dark, 0.1);
+            background-color: $light;
+        }
+        
+        svg {
+            color: $primary;
+            width: 28px;
+            height: 28px;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+    }
+
+    .weather-icon {
+        width: 140px;
+        height: 140px;
+        margin: 10px auto 15px;
+        filter: drop-shadow(0 10px 20px rgba($dark, 0.2));
+        position: relative;
+        z-index: 2;
+    }
+
+    .temperature {
+        font-size: 72px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        line-height: 1;
+        text-shadow: 0 4px 12px rgba($dark, 0.15);
+        position: relative;
+        z-index: 2;
+    }
+
+    .weather-description {
+        font-size: 20px;
+        text-transform: capitalize;
+        font-weight: 500;
+        opacity: 0.9;
+        letter-spacing: 0.5px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .additional-info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        margin-top: 30px;
+        font-size: 16px;
+        animation: fadeInUp 1.8s ease-out;
+
+        p {
+            background: linear-gradient(135deg, rgba(0, 131, 176, 0.1), rgba(0, 180, 219, 0.1));
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+            width: 45%;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 131, 176, 0.1);
+
+            &:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+}
+
+.error {
+    color: $error-color;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba($error-color, 0.1);
+    border-radius: 8px;
+}
+
+.loading {
+    margin: 20px 0;
+    font-weight: 500;
+    color: $primary-color;
+}

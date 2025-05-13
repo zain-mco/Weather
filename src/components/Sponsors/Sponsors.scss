@@ -1,0 +1,111 @@
+@import '../../styles/variables';
+@import '../../styles/animations';
+
+.sponsors-section {
+    margin-top: 40px;
+    text-align: center;
+    padding-top: 30px;
+    border-top: 2px solid rgba(0, 131, 176, 0.2);
+    animation: fadeIn 2s ease-out;
+
+    h2 {
+        font-size: 24px;
+        color: $title-color;
+        margin-bottom: 20px;
+        font-weight: 600;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, $primary-color, $secondary-color);
+            border-radius: 3px;
+        }
+    }
+}
+
+.sponsors-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.sponsor {
+    width: 200px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    margin-bottom: 15px;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: calc(0.1s * var(--i, 1));
+
+    &:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .sponsor-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+
+    .sponsor-logo {
+        width: 100%;
+        height: 100px;
+        object-fit: contain;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.1));
+    }
+
+    &:hover .sponsor-logo {
+        transform: scale(1.05);
+        filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.15));
+    }
+
+    .sponsor-name {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 15px 0;
+        color: $primary-color;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .sponsor-link {
+        display: inline-block;
+        background: linear-gradient(135deg, $primary-color, $secondary-color);
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 500;
+        margin-top: auto;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 10px rgba(0, 131, 176, 0.3);
+        position: relative;
+        overflow: hidden;
+
+        &:hover {
+            background: linear-gradient(135deg, darken($primary-color, 10%), darken($secondary-color, 10%));
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 131, 176, 0.4);
+        }
+    }
+}

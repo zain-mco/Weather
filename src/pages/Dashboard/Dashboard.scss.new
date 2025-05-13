@@ -1,0 +1,144 @@
+// Dashboard styles
+// Media query mixins for responsive design
+@mixin for-tablet {
+  @media (max-width: 1024px) { @content; }
+}
+
+@mixin for-mobile {
+  @media (max-width: 768px) { @content; }
+}
+
+@mixin for-small-mobile {
+  @media (max-width: 480px) { @content; }
+}
+
+// Global styles to ensure no overflow issues
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #56ccf2, #2f80ed);
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.dashboard {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    
+    h1 {
+      color: #333;
+      margin: 0;
+      text-align: center;
+      width: 100%;
+      color: white;
+      font-size: 32px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+  }
+  
+  .weather-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    
+    .weather-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      
+      .city-name {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      
+      .temperature {
+        font-size: 2.5rem;
+        margin: 15px 0;
+      }
+      
+      .weather-info {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+        
+        .info-item {
+          text-align: center;
+          
+          .label {
+            font-size: 0.8rem;
+            color: #666;
+          }
+          
+          .value {
+            font-size: 1.1rem;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive styles
+@include for-tablet {
+  .dashboard {
+    padding: 20px;
+  }
+}
+
+@include for-mobile {
+  .dashboard {
+    padding: 15px;
+    
+    .header {
+      h1 {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+@include for-small-mobile {
+  .dashboard {
+    padding: 10px;
+    
+    .header {
+      h1 {
+        font-size: 20px;
+      }
+    }
+    
+    .weather-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+}

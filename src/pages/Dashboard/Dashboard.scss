@@ -1,0 +1,475 @@
+// Modern Dashboard styles
+
+// color palette
+$primary-color: #2c6bed;
+$secondary-color: #64B5F6;
+$accent-color: #03A9F4;
+$dark-color: #102a43;
+$light-color: #ffffff;
+$background-color: #f8fafc;
+$gray-light: #f0f4f8;
+$gray-mid: #829ab1;
+$gray-dark: #486581;
+$heading-color: #102a43;
+$text-color: #334e68;
+
+// Media query mixins for responsive design
+@mixin for-large-screens {
+  @media (min-width: 1441px) { @content; }
+}
+
+@mixin for-desktop {
+  @media (min-width: 1025px) and (max-width: 1440px) { @content; }
+}
+
+@mixin for-tablet {
+  @media (min-width: 768px) and (max-width: 1024px) { @content; }
+}
+
+@mixin for-mobile {
+  @media (max-width: 767px) { @content; }
+}
+
+// Global styles
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(160deg, $primary-color, $accent-color);
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  position: relative;
+  color: $text-color;
+  font-size: 16px;
+  
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, rgba(0,0,0,0.05), transparent);
+    z-index: -1;
+  }
+}
+
+// Website header
+.site-header {
+  background-color: rgba($light-color, 0.98);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba($dark-color, 0.1);
+  padding: 22px 0;
+  position: sticky; // إعادة لستكي كما كان
+  top: 0;
+  width: 100%;
+  z-index: 1000; // زيادة قيمة z-index للتأكد من ظهور Header فوق جميع العناصر
+  margin-bottom: 0; // إزالة الهامش السفلي
+
+  .header-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: $primary-color;
+      text-decoration: none;
+
+      svg {
+        width: 42px;
+        height: 42px;
+        margin-right: 12px;
+        fill: $primary-color;
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+
+      a {
+        color: $dark-color;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 17px;
+        transition: all 0.3s ease;
+        position: relative;
+        padding-bottom: 5px;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: $primary-color;
+          transition: width 0.3s ease;
+        }
+
+        &:hover {
+          color: $primary-color;
+
+          &::after {
+            width: 100%;
+          }
+        }
+
+        &.active {
+          color: $primary-color;
+          
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Main content area
+.dashboard {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 80px);
+  margin-bottom: 60px;
+  
+  .dashboard-hero {
+    background: linear-gradient(135deg, rgba($primary-color, 0.95), rgba($secondary-color, 0.9));
+    color: $light-color;
+    padding: 120px 0 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 30px;
+    margin-bottom: 40px; // تقليل الهامش السفلي قليلاً
+    box-shadow: 0 5px 15px rgba($dark-color, 0.1);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      z-index: -1;
+    }
+    
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      
+      h1 {
+        font-size: 48px;
+        font-weight: 800;
+        margin: 0 0 25px 0;
+        letter-spacing: 0.5px;
+        text-shadow: 0 2px 4px rgba($dark-color, 0.3);
+      }
+      
+      p {
+        font-size: 20px;
+        margin-bottom: 35px;
+        font-weight: 300;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+        opacity: 0.9;
+      }
+    }
+  }
+  
+  /* فاصل بين الهيدر والمحتوى */
+  .header-content-separator {
+    height: 120px; /* ارتفاع كبير للفصل التام */
+    width: 100%;
+    position: relative;
+  }
+  
+  .content-wrapper {
+    padding: 20px;
+    width: 100%;
+    margin: 80px 0;
+    position: relative;
+    z-index: 5;
+  }
+  
+  .dashboard-content {
+    padding: 30px 40px 80px;
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
+    background-color: rgba($light-color, 0.02);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba($dark-color, 0.05);
+    position: relative;
+    overflow: visible;
+  }
+  
+  .weather-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    
+    .weather-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      
+      .city-name {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      
+      .temperature {
+        font-size: 2.5rem;
+        margin: 15px 0;
+      }
+      
+      .weather-info {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+        
+        .info-item {
+          text-align: center;
+          
+          .label {
+            font-size: 0.8rem;
+            color: #666;
+          }
+          
+          .value {
+            font-size: 1.1rem;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Footer
+.site-footer {
+  background-color: $dark-color;
+  color: $light-color;
+  padding: 80px 0 40px;
+  margin-top: 40px;
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+  
+  .footer-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+    
+    @include for-tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include for-mobile {
+      grid-template-columns: 1fr;
+    }
+    
+    .footer-column {
+      h3 {
+        color: $light-color;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 15px;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 50px;
+          height: 3px;
+          background-color: $primary-color;
+          border-radius: 2px;
+        }
+      }
+      
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        
+        li {
+          margin-bottom: 12px;
+          
+          a {
+            color: $gray-mid;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 16px;
+            position: relative;
+            padding-left: 15px;
+            
+            &:before {
+              content: '→';
+              position: absolute;
+              left: 0;
+              top: 50%;
+              transform: translateY(-50%);
+              font-size: 12px;
+              opacity: 0.7;
+              transition: transform 0.3s ease;
+            }
+            
+            &:hover {
+              color: $secondary-color;
+              
+              &:before {
+                transform: translate(3px, -50%);
+                color: $secondary-color;
+              }
+            }
+          }
+        }
+      }
+      
+      p {
+        color: $gray-mid;
+        font-size: 16px;
+        line-height: 1.7;
+      }
+    }
+  }
+  
+  .footer-bottom {
+    max-width: 1600px;
+    margin: 60px auto 0;
+    padding: 30px 40px 0;
+    border-top: 1px solid rgba($light-color, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    @include for-mobile {
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+    }
+    
+    .copyright {
+      color: $gray-mid;
+      font-size: 16px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 20px;
+      
+      a {
+        color: $gray-mid;
+        font-size: 20px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba($light-color, 0.05);
+        
+        &:hover {
+          color: $light-color;
+          background-color: $primary-color;
+          transform: translateY(-3px);
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@include for-tablet {
+  .site-header .header-content {
+    padding: 0 20px;
+  }
+  
+  .dashboard-content {
+    padding: 40px 20px;
+  }
+}
+
+@include for-mobile {
+  .site-header {
+    .header-content {
+      padding: 0 15px;
+      flex-direction: column;
+      gap: 15px;
+      
+      .nav-links {
+        gap: 15px;
+      }
+    }
+  }
+  
+  .dashboard .dashboard-hero {
+    padding: 60px 0;
+    
+    .hero-content h1 {
+      font-size: 30px;
+    }
+  }
+  
+  .dashboard-content {
+    padding: 30px 15px;
+  }
+}
